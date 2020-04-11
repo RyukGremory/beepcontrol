@@ -1,0 +1,170 @@
+
+{% extends "layouts/default.html" %}
+
+{% block title %} Dashboard {% endblock title %}
+
+<!-- Specific CSS goes HERE -->
+{% block stylesheets %}{% endblock stylesheets %}
+
+{% block content %}
+
+    <div class="panel-header bg-primary-gradient">
+      <div class="page-inner py-5">
+        <div class="d-flex align-items-left align-items-md-center flex-column flex-md-row">
+          <div>
+            <h2 class="text-white pb-2 fw-bold">Dashboard</h2>
+            <h5 class="text-white op-7 mb-2">Free Bootstrap 4 Admin Dashboard</h5>
+          </div>
+          <div class="ml-md-auto py-2 py-md-0">
+            <a href="#" class="btn btn-white btn-border btn-round mr-2">Manage</a>
+            <a href="#" class="btn btn-secondary btn-round">Add Customer</a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+      <div class="row">
+        <div class="col-md-6">
+          <div class="card full-height">
+            <div class="card-header">
+              <div class="card-head-row">
+                <div class="card-title">Aulas</div>
+                <div class="card-tools">
+                </div>
+              </div>
+            </div>
+            <div class="card-body">
+              <div class="d-flex">
+                <div class="avatar avatar-online">
+                  <span class="avatar-title rounded-circle border border-white bg-info">J</span>
+                </div>
+                <div class="flex-1 ml-3 pt-1">
+                  <h6 class="text-uppercase fw-bold mb-1">Joko Subianto <span class="text-warning pl-3">pending</span></h6>
+                  <span class="text-muted">I am facing some trouble with my viewport. When i start my</span>
+                </div>
+                <div class="float-right pt-1">
+                  <small class="text-muted">8:40 PM</small>
+                </div>
+              </div>
+              <div class="separator-dashed"></div>
+              <div class="d-flex">
+                <div class="avatar avatar-offline">
+                  <span class="avatar-title rounded-circle border border-white bg-secondary">P</span>
+                </div>
+                <div class="flex-1 ml-3 pt-1">
+                  <h6 class="text-uppercase fw-bold mb-1">Prabowo Widodo <span class="text-success pl-3">open</span></h6>
+                  <span class="text-muted">I have some query regarding the license issue.</span>
+                </div>
+                <div class="float-right pt-1">
+                  <small class="text-muted">1 Day Ago</small>
+                </div>
+              </div>
+              <div class="separator-dashed"></div>
+              <div class="d-flex">
+                <div class="avatar avatar-away">
+                  <span class="avatar-title rounded-circle border border-white bg-danger">L</span>
+                </div>
+                <div class="flex-1 ml-3 pt-1">
+                  <h6 class="text-uppercase fw-bold mb-1">Lee Chong Wei <span class="text-muted pl-3">closed</span></h6>
+                  <span class="text-muted">Is there any update plan for RTL version near future?</span>
+                </div>
+                <div class="float-right pt-1">
+                  <small class="text-muted">2 Days Ago</small>
+                </div>
+              </div>
+              <div class="separator-dashed"></div>
+              <div class="d-flex">
+                <div class="avatar avatar-offline">
+                  <span class="avatar-title rounded-circle border border-white bg-secondary">P</span>
+                </div>
+                <div class="flex-1 ml-3 pt-1">
+                  <h6 class="text-uppercase fw-bold mb-1">Peter Parker <span class="text-success pl-3">open</span></h6>
+                  <span class="text-muted">I have some query regarding the license issue.</span>
+                </div>
+                <div class="float-right pt-1">
+                  <small class="text-muted">2 Day Ago</small>
+                </div>
+              </div>
+              <div class="separator-dashed"></div>
+              <div class="d-flex">
+                <div class="avatar avatar-away">
+                  <span class="avatar-title rounded-circle border border-white bg-danger">L</span>
+                </div>
+                <div class="flex-1 ml-3 pt-1">
+                  <h6 class="text-uppercase fw-bold mb-1">Logan Paul <span class="text-muted pl-3">closed</span></h6>
+                  <span class="text-muted">Is there any update plan for RTL version near future?</span>
+                </div>
+                <div class="float-right pt-1">
+                  <small class="text-muted">2 Days Ago</small>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+{% endblock content %}
+
+{% block javascripts %}
+
+	<script src="/static/assets/js/demo.js"></script>
+
+	<script>
+		Circles.create({
+			id:'circles-1',
+			radius:45,
+			value:60,
+			maxValue:100,
+			width:7,
+			text: 5,
+			colors:['#f1f1f1', '#FF9E27'],
+			duration:400,
+			wrpClass:'circles-wrp',
+			textClass:'circles-text',
+			styleWrapper:true,
+			styleText:true
+		})
+
+		Circles.create({
+			id:'circles-2',
+			radius:45,
+			value:70,
+			maxValue:100,
+			width:7,
+			text: 36,
+			colors:['#f1f1f1', '#2BB930'],
+			duration:400,
+			wrpClass:'circles-wrp',
+			textClass:'circles-text',
+			styleWrapper:true,
+			styleText:true
+		})
+
+		Circles.create({
+			id:'circles-3',
+			radius:45,
+			value:40,
+			maxValue:100,
+			width:7,
+			text: 12,
+			colors:['#f1f1f1', '#F25961'],
+			duration:400,
+			wrpClass:'circles-wrp',
+			textClass:'circles-text',
+			styleWrapper:true,
+			styleText:true
+		})
+
+		$('#lineChart').sparkline([105,103,123,100,95,105,115], {
+			type: 'line',
+			height: '70',
+			width: '100%',
+			lineWidth: '2',
+			lineColor: '#ffa534',
+			fillColor: 'rgba(255, 165, 52, .14)'
+		});
+	</script>
+
+{% endblock javascripts %}

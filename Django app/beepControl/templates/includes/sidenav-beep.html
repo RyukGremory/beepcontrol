@@ -1,0 +1,92 @@
+
+		<!-- Sidebar -->
+		<div class="sidebar sidebar-style-2" data-background-color="dark2">
+					
+			<div class="sidebar-wrapper scrollbar scrollbar-inner">
+				<div class="sidebar-content">
+				
+					{% comment %}{% if user.is_authenticated %} {% endcomment %}
+
+						<div class="user">
+							<div class="avatar-sm float-left mr-2">
+								<img src="/static/assets/img/profile.jpg" alt="..." class="avatar-img rounded-circle">
+							</div>
+							<div class="info">
+								<a data-toggle="collapse" href="#collapseExample" aria-expanded="true">
+									<span>
+										{{ request.user.user }}
+										<span class="user-level">
+											{{ request.user.email }}  
+										</span>
+										<span class="caret"></span>
+									</span>
+								</a>
+								<div class="clearfix"></div>
+
+								<div class="collapse in" id="collapseExample">
+									<ul class="nav">
+										<li>
+											<a href="#profile">
+												<span class="link-collapse">My Profile</span>
+											</a>
+										</li>
+										<li>
+											<a href={% comment %}{% url 'logout' %}{% endcomment %}>
+												<span class="link-collapse">Logout</span>
+											</a>
+										</li>
+									</ul>
+								</div>
+							</div>
+						</div>
+						<ul class="nav nav-primary">
+							<li class="nav-item active">
+								<a data-toggle="collapse" href="#dashboard" class="collapsed" aria-expanded="false">
+									<i class="fas fa-home"></i>
+									<p>Dashboard</p>
+									<span class="caret"></span>
+								</a>
+							</li>
+							<li class="nav-section">
+								<span class="sidebar-mini-icon">
+									<i class="fa fa-ellipsis-h"></i>
+								</span>
+								<h4 class="text-section">Components</h4>
+							</li>
+							<li class="nav-item">
+								<a data-toggle="collapse" href="#base">
+									<i class="fas fa-layer-group"></i>
+									<p>Operaciones</p>
+									<span class="caret"></span>
+								</a>
+																<div class="collapse" id="base">
+									<ul class="nav nav-collapse">
+										<li>
+											<a href="/locks.html">
+												<span class="sub-item">Locks</span>
+											</a>
+										</li>
+										<li>
+											<a href="/buttons.html">
+												<span class="sub-item">Registro</span>
+											</a>
+										</li>
+										<li>
+											<a href="/gridsystem.html">
+												<span class="sub-item">Grid System</span>
+											</a>
+										</li>
+									</ul>
+								</div>
+							</li>
+								
+							</li>
+						
+						</ul>
+					
+					{% comment %}{% endif %} {% endcomment %}	
+
+				</div>
+			</div>
+		</div>
+		<!-- End Sidebar -->

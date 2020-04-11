@@ -1,0 +1,96 @@
+
+{% extends "layouts/default.html" %}
+
+{% block title %} Dashboard {% endblock title %}
+
+<!-- Specific CSS goes HERE -->
+{% block stylesheets %}{% endblock stylesheets %}
+
+{% block content %}
+
+{% for entry in locks %}
+<div class="col-md-12">
+                <div class="card">
+                    <div class="card-header">
+                        <h4 class="card-title">{{entry.name}}</h4>
+                        
+                    </div>
+                    <div class="card-body">
+                        <p class="demo">
+							<form action="#" method="GET"> 
+<input class="btn btn-primary" type="submit" name="{{entry.button}}" value="Abrir" accion={{entry.string}}>
+<input class="btn btn-danger" type="submit" name="{{entry.button}}" value="Cerrar" accion={{entry.string}}> 
+</form>
+                        </p>
+                    </div>
+					    
+                </div>
+            </div>
+
+{% endfor %}
+
+{% endblock content %}
+
+{% block javascripts %}
+
+	<script src="/static/assets/js/demo.js"></script>
+
+	<script>
+  event.preventDefault();
+}
+		Circles.create({
+			id:'circles-1',
+			radius:45,
+			value:60,
+			maxValue:100,
+			width:7,
+			text: 5,
+			colors:['#f1f1f1', '#FF9E27'],
+			duration:400,
+			wrpClass:'circles-wrp',
+			textClass:'circles-text',
+			styleWrapper:true,
+			styleText:true
+		})
+
+		Circles.create({
+			id:'circles-2',
+			radius:45,
+			value:70,
+			maxValue:100,
+			width:7,
+			text: 36,
+			colors:['#f1f1f1', '#2BB930'],
+			duration:400,
+			wrpClass:'circles-wrp',
+			textClass:'circles-text',
+			styleWrapper:true,
+			styleText:true
+		})
+
+		Circles.create({
+			id:'circles-3',
+			radius:45,
+			value:40,
+			maxValue:100,
+			width:7,
+			text: 12,
+			colors:['#f1f1f1', '#F25961'],
+			duration:400,
+			wrpClass:'circles-wrp',
+			textClass:'circles-text',
+			styleWrapper:true,
+			styleText:true
+		})
+
+		$('#lineChart').sparkline([105,103,123,100,95,105,115], {
+			type: 'line',
+			height: '70',
+			width: '100%',
+			lineWidth: '2',
+			lineColor: '#ffa534',
+			fillColor: 'rgba(255, 165, 52, .14)'
+		});
+	</script>
+
+{% endblock javascripts %}
