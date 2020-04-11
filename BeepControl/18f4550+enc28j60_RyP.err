@@ -1,0 +1,26 @@
+Compiling C:\Users\pdelacruz\Downloads\AutomatizacionRobotica\BeepControl\18f4550+enc28j60_RyP on 10-Apr-20 at 19:22
+>>> Warning 243 "C:\Program Files (x86)\PICC\Devices\string.h" Line 126(1,1): May be missing a typecast
+>>> Warning 243 "C:\Program Files (x86)\PICC\Devices\string.h" Line 139(1,1): May be missing a typecast
+>>> Warning 243 "C:\Program Files (x86)\PICC\Devices\string.h" Line 149(1,1): May be missing a typecast
+>>> Warning 243 "C:\Program Files (x86)\PICC\Devices\string.h" Line 161(1,1): May be missing a typecast
+>>> Warning 243 "C:\Program Files (x86)\PICC\Devices\string.h" Line 176(1,1): May be missing a typecast
+>>> Warning 243 "C:\Program Files (x86)\PICC\Devices\string.h" Line 398(1,1): May be missing a typecast
+>>> Warning 243 "C:\Program Files (x86)\PICC\Devices\stdlib.h" Line 425(1,1): May be missing a typecast
+>>> Warning 243 "C:\Program Files (x86)\PICC\Devices\stdlib.h" Line 779(1,1): May be missing a typecast
+>>> Warning 243 "C:\Program Files (x86)\PICC\Devices\stdlib.h" Line 933(1,1): May be missing a typecast
+>>> Warning 201 "C:\Users\pdelacruz\Downloads\AutomatizacionRobotica\BeepControl\tcpip\helpers.c" Line 188(1,1): Assignment inside relational expression
+>>> Warning 240 "C:\Users\pdelacruz\Downloads\AutomatizacionRobotica\BeepControl\tcpip\arp.c" Line 106(18,24): Pointer types do not match
+>>> Warning 240 "C:\Users\pdelacruz\Downloads\AutomatizacionRobotica\BeepControl\tcpip\arp.c" Line 214(18,24): Pointer types do not match
+>>> Warning 201 "C:\Users\pdelacruz\Downloads\AutomatizacionRobotica\BeepControl\tcpip\http.c" Line 174(1,1): Assignment inside relational expression
+>>> Warning 203 "C:\Users\pdelacruz\Downloads\AutomatizacionRobotica\BeepControl\tcpip\http.c" Line 610(1,1): Condition always TRUE
+>>> Warning 242 "C:\Users\pdelacruz\Downloads\AutomatizacionRobotica\BeepControl\tcpip\http.c" Line 682(32,33): May be missing a break
+>>> Warning 201 "C:\Users\pdelacruz\Downloads\AutomatizacionRobotica\BeepControl\tcpip\http.c" Line 701(1,1): Assignment inside relational expression
+>>> Warning 242 "C:\Users\pdelacruz\Downloads\AutomatizacionRobotica\BeepControl\tcpip\http.c" Line 774(20,21): May be missing a break
+>>> Warning 242 "C:\Users\pdelacruz\Downloads\AutomatizacionRobotica\BeepControl\tcpip\http.c" Line 818(55,56): May be missing a break
+>>> Warning 242 "C:\Users\pdelacruz\Downloads\AutomatizacionRobotica\BeepControl\tcpip\http.c" Line 862(37,38): May be missing a break
+>>> Warning 242 "C:\Users\pdelacruz\Downloads\AutomatizacionRobotica\BeepControl\tcpip\http.c" Line 876(26,27): May be missing a break
+>>> Warning 207 "C:\Users\pdelacruz\Downloads\AutomatizacionRobotica\BeepControl\tcpip\stacktsk.c" Line 417(1,1): Code has no effect
+>>> Warning 207 "C:\Users\pdelacruz\Downloads\AutomatizacionRobotica\BeepControl\tcpip\stacktsk.c" Line 460(1,1): Code has no effect
+      Memory usage:   ROM=88%      RAM=36% - 45%
+      0 Errors,  22 Warnings.
+Build Successful.
