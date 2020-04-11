@@ -2,8 +2,23 @@ from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, get_object_or_404, redirect
 from django.template import loader
 from django.http import HttpResponse
-from .models import Locks
-from .utilities import accion
+from .models import Locks,Institutions,Campus,Building,Rooms,Account,Control,Permission,Carrier,Subject,SubjectSchedule,Permission,UserSubject
+import requests
+
+def accion (sentencia):
+    URL = 'http://192.168.1.15'
+    params = {sentencia[0:3]:sentencia[-1]}
+    requests.get(url = URL,params=params)
+
+
+def beginClass (user,lock):
+    entries = Control.objects.get()
+    pass
+
+def EndClass ():
+    pass
+
+
 #@login_required(login_url="/login/")
 def index(request):
     return render(request, "index.html")
@@ -11,10 +26,21 @@ def index(request):
 def locksView(request):
     i = Locks.objects.all()
     context = {'locks':i}
+    
     for i in request.GET:
-        accion(i[-1],'...')
-
+        accion(i)
     return render(request, "pages/locks.html",context)
+
+def controlView(request):
+    entries = Locks.objects.all()
+    context = {'elements':entries}
+    
+    return render(request, "pages/control.html",context)
+
+def registroView(request):
+    context = {}
+    
+    return render(request, "pages/registro.html",context)
 
 
 #@login_required(login_url="/login/")

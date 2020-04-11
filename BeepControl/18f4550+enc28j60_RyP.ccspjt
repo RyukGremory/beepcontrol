@@ -11,10 +11,10 @@ Type=4
 1=18f4550+enc28j60_RyP.c
 
 [defines]
-buildcount=87
+buildcount=90
 
 [ProjectLog]
-Days=1
+Days=2
 D1=10-04-2020
 D1_L=29
 D1_L1=[44532]Started Editing.
@@ -27,7 +27,7 @@ D1_L7=[49745]Started Editing.
 D1_L8=[50046]Stopped Editing.
 D1_L9=[50142]Started Editing.
 D1_L10=[50940]Stopped Editing.
-TotalEdit=259
+TotalEdit=264
 TotalDebug=0
 D1_E=259
 D1_D=0
@@ -50,10 +50,20 @@ D1_L26=[68482]Stopped Editing.
 D1_L27=[68836]Started Editing.
 D1_L28=[69955]Stopped Editing.
 D1_L29=[69955]Project Closed.
+D2=11-04-2020
+D2_L=6
+D2_L1=[44346]Project Opened.
+D2_L2=[44394]Started Editing.
+D2_L3=[44699]Stopped Editing.
+D2_L4=[45537]Started Editing.
+D2_L5=[45797]Stopped Editing.
+D2_E=5
+D2_D=0
+D2_L6=[45797]Project Closed.
 
 [Opened Files]
 1=18f4550+enc28j60_RyP.c
-t1=13
+t1=205
 2=..\..\Interfacing-Servo-Motor-with-PIC-Microcontroller\Interfacing Servo Motor with PIC Microcontroller\smipic.c
 t2=1
 3=servo\Servo.h

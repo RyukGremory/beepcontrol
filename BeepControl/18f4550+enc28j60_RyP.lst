@@ -1,4 +1,4 @@
-CCS PCH C Compiler, Version 5.094d, 1               10-Apr-20 19:22
+CCS PCH C Compiler, Version 5.094d, 1               11-Apr-20 12:39
 Compiler operating in Evaluation Mode
 To obtain a fully enabled compiler visit www.ccsinfo.com/products
 
@@ -574,7 +574,7 @@ To obtain a fully enabled compiler visit www.ccsinfo.com/products
 04B6:  DATA 00,00
 04B8:  DATA 43,00
 04BA:  DATA 41,00
-04BC:  DATA 41,43
+04BC:  DATA 5A,00
 04BE:  DATA 00,00
 04C0:  DATA 0C,42
 04C2:  DATA 65,65
@@ -1304,9 +1304,6 @@ To obtain a fully enabled compiler visit www.ccsinfo.com/products
 .................... #byte trisc=0x87
 .................... #byte portc = 0x07
 .................... 
-.................... 
-.................... 
-.................... 
 .................... /** Configuración para el uso del stack tcip **/
 .................... #define STACK_USE_ICMP        1  //Módulo de respuesta ICMP (ping)
 .................... #define STACK_USE_ARP         1  //Para solucionar direccionamiento MAC de las IP
@@ -1315,16 +1312,12 @@ To obtain a fully enabled compiler visit www.ccsinfo.com/products
 .................... #define STACK_USE_CCS_PICENS  1  //CCS PICENS (Embedded Ethernet) 18F4620 + ENC28J60
 .................... #define STACK_USE_MCPENC      1  //Uso del enc28j60 por el stack (stacktsk.c)
 .................... #define STACK_USE_MAC         1  //Uso de la tarjeta de red
-.................... 
 .................... #define HTTP_SOCKET 80         //Nº de puerto asociado al socket.
-.................... 
 .................... #define ENC_MAC_USE_SPI 1           //Uso del SPI por hardware
-.................... 
 .................... #define PIN_ENC_MAC_SO  PIN_B0      //Entrada serie de datos
 .................... #define PIN_ENC_MAC_CS  PIN_B2      //Chip select
 .................... #define PIN_ENC_MAC_RST PIN_B3      //Reset
 .................... #define PIN_ENC_MAC_INT PIN_B4      //Interrupción
-.................... 
 .................... /******************************************************************************/
 .................... 
 .................... #define use_portd_lcd TRUE       //Uso del puerto d para control del lcd
@@ -1848,7 +1841,6 @@ To obtain a fully enabled compiler visit www.ccsinfo.com/products
 .................... return(value);
 .................... }
 .................... #endif
-.................... 
 .................... 
 .................... #include "tcpip/stacktsk.c"      //Carga el stack TCP/IP de Microchip 
 .................... /*********************************************************************
@@ -38537,7 +38529,6 @@ To obtain a fully enabled compiler visit www.ccsinfo.com/products
 ....................    
 ....................    //Para ver en la pantalla los valores recibidos
 ....................   /*
-....................    printf(lcd_putc,"\fCGI FILE=%LD", file);
 ....................    printf(lcd_putc,"\nKEY=%S", key);
 ....................    printf(lcd_putc,"\nVAL=%S", val);
 ....................   */
@@ -38568,7 +38559,7 @@ To obtain a fully enabled compiler visit www.ccsinfo.com/products
 4BBC:  MOVWF  x09
 4BBE:  MOVLB  0
 4BC0:  BRA    4BCA
-....................    case "AC": accionServo = 2; break;
+....................    case "Z": accionServo = 2; break;
 4BC2:  MOVLW  02
 4BC4:  MOVLB  3
 4BC6:  MOVWF  x09

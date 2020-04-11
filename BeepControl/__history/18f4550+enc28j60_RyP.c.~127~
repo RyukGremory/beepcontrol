@@ -1,17 +1,3 @@
-////////////////////////////////////////////////////////////////////////////////
-//                                                                            //
-//                SERVIDOR WEB CON PIC 18F4550 Y ENC28J60                     //
-//                                                                            //
-//                      ccs PIC C compiler v4.104                             //
-//                                                                            //
-//                         (c) RobotyPic 2015                                 //
-//                                                                            //
-////////////////////////////////////////////////////////////////////////////////
-// Conmuta encendido-apagado de 3 leds controlados desde la aplicación web    //
-// Muestra variables leídas por el PIC: Canal analógico An0 y estado bit RE0  //
-// Representa en lcd el texto introducido desde la aplicación web             //
-////////////////////////////////////////////////////////////////////////////////
-
 #include <18F4550.h>
 #device ADC=8
 #use delay(clock=20000000)
@@ -21,9 +7,6 @@
 #byte trisc=0x87
 #byte portc = 0x07
 
-
-
-
 /** Configuración para el uso del stack tcip **/
 #define STACK_USE_ICMP        1  //Módulo de respuesta ICMP (ping)
 #define STACK_USE_ARP         1  //Para solucionar direccionamiento MAC de las IP
@@ -32,23 +15,17 @@
 #define STACK_USE_CCS_PICENS  1  //CCS PICENS (Embedded Ethernet) 18F4620 + ENC28J60
 #define STACK_USE_MCPENC      1  //Uso del enc28j60 por el stack (stacktsk.c)
 #define STACK_USE_MAC         1  //Uso de la tarjeta de red
-
 #define HTTP_SOCKET 80         //Nº de puerto asociado al socket.
-
 #define ENC_MAC_USE_SPI 1           //Uso del SPI por hardware
-
 #define PIN_ENC_MAC_SO  PIN_B0      //Entrada serie de datos
 #define PIN_ENC_MAC_CS  PIN_B2      //Chip select
 #define PIN_ENC_MAC_RST PIN_B3      //Reset
 #define PIN_ENC_MAC_INT PIN_B4      //Interrupción
-
 /******************************************************************************/
 
 #define use_portd_lcd TRUE       //Uso del puerto d para control del lcd
 #include <LCD420PIC18F_RyP.c>    //Carga librería del lcd de 4x20 para familia 18F
-
 #include "tcpip/stacktsk.c"      //Carga el stack TCP/IP de Microchip 
-
 /******************************************************************************/
 
 /*********************  PAGINA WEB A MOSTRAR **********************************/
@@ -66,43 +43,20 @@ const char  HTML_INDEX_PAGE[]="
 </FORM>
 
 <FORM METHOD=GET>
-<input type=\"submit\" name=\"boton1\" value=\"A\">
-<input type=\"submit\" name=\"boton1\" value=\"C\">
+<input type=\"submit\" name=\"CM1\" value=\"A\">
+<input type=\"submit\" name=\"CM1\" value=\"C\">
+<input type=\"submit\" name=\"CM1\" value=\"AC\">
 </FORM>
-
-
-
 <FORM METHOD=GET>
-<input type=\"submit\" name=\"boton2\" value=\"A\">
-<input type=\"submit\" name=\"boton2\" value=\"C\">
+<input type=\"submit\" name=\"CM2\" value=\"A\">
+<input type=\"submit\" name=\"CM2\" value=\"C\">
+<input type=\"submit\" name=\"CM2\" value=\"AC\">
 </FORM>
-
 <FORM METHOD=GET>
-<input type=\"submit\" name=\"boton3\" value=\"A\">
-<input type=\"submit\" name=\"boton3\" value=\"C\">
+<input type=\"submit\" name=\"CM3\" value=\"A\">
+<input type=\"submit\" name=\"CM3\" value=\"C\">
+<input type=\"submit\" name=\"CM3\" value=\"AC\">
 </FORM>
-
-<P><A HREF=\"/lecturas\">Lecturas del PIC</A>
-</BODY></HTML>
-";
-
-/* Página secundaria (\lecturas). Accesible desde la página principal */
-const char  HTML_LECTURAS_PAGE[]="
-<meta http-equiv=\"refresh\"content=\"3;url=lecturas\">
-
-<HTML><BODY BGCOLOR=#FFFFFF TEXT=#000000>
-<P>
-<center><H1>Servidor WEB con PIC 18f4550 </H1></center>
-<BR><center><H2>ROBOTYPIC</H2></CENTER>
-<br><center>LECTURAS</center>
-
-<P><B>AN: </B>%0 </P>
-<BR/>
-<P><B>RE0: </B>%1 </P>
-<BR/>
-
-
-<P><A HREF=\"/\">LCD/LEDs</A>
 </BODY></HTML>
 ";
 
@@ -137,10 +91,20 @@ void IPAddrInit(void) {
    MY_MASK_BYTE4=0;
 }
 
+void moveServo(int16 puerto,int16 tiempo){
+unsigned int i;
+   for(i=0;i<60;i++){ 
+      output_toggle(puerto);
+      delay_us(tiempo);
+      output_low(puerto);
+    }
+}
+
 void servoAccion(int servo, int accion)   //180 Degree
 {
-
 int16 puerto = PIN_C0;
+int16 tiempoCerrar = 356;
+int16 tiempoAbrir = 2150;
 
 switch(servo){
    case 1:
@@ -151,29 +115,23 @@ switch(servo){
       puerto = PIN_C2; break;
 }
 
+output_low(puerto); //Me aseguro que este apagado
 
 switch(accion){
    case 0: //Cerrar
-      for(i=0;i<50;i++)
-    {
-        output_toggle(puerto);
-        delay_us(2200);
-        output_low(puerto);
-    }
+      moveServo(puerto,tiempoCerrar);
       break;
-   case 1: //Abrir
-      unsigned int i;
-    for(i=0;i<50;i++)
-    {
-        output_toggle(puerto);
-        delay_us(2200);
-        output_low(puerto);
-    }
-    break;
+   case 1: //Abrir 180 grados
+      moveServo(puerto,tiempoAbrir);
+      break;
+   case 2: //Abre y cierra
+      moveServo(puerto,tiempoCerrar); //Me aseguro que se cierre
+      moveServo(puerto,tiempoAbrir); //Lo abro
+      delay_ms(1000); //Espero un segundo en maquina virtual, en no virtual es 3000 ms
+      moveServo(puerto,tiempoCerrar); //Lo cierro
+      break;
       }
- 
 }
-
 
 
 /***************************  FUNCIÓN GET PAGE   ******************************/
@@ -184,25 +142,15 @@ y una secundaria(/lecturas)                                                   */
 int32 http_get_page(char *file_str) {
    int32 file_loc=0;
    static char index[]="/";
-   static char lecturas[]="/lecturas";
+ 
    
-   printf(lcd_putc,"\fRequest %s ",file_str);      //Muestra en lcd solicitud
+   //printf(lcd_putc,"\fRequest %s ",file_str);      //Muestra en lcd solicitud
 
    /* Busca la posición de memoria donde se encuentra la página solicitada */
    if (stricmp(file_str,index)==0)                 //Si es la principal...
       file_loc=label_address(HTML_INDEX_PAGE);     //...toma su posición en la memoria
-   else if (stricmp(file_str,lecturas)==0)            //O si es la secundaria...
-      file_loc=label_address(HTML_LECTURAS_PAGE);    //...toma su posición en la memoria
 
-   /* Muestra en lcd la página solicitada */
-   if (file_loc){                                  //Si existe... 
-      printf(lcd_putc,"\n(FILE=%LU)",file_loc);    //...muestra en lcd pos. de memoria
-   }
-   else{                                           //Si no existe...
-      printf(lcd_putc,"\n(File Not Found)");       //...muestra en lcd mensaje
-   }
-   /* Devuelve la posición en la memoria donde se encuentra la página a mostrar */
-   return(file_loc);                               
+   return(file_loc);
 }
 
 /**************************  FUNCIÓN FORMAT CHAR  *****************************/
@@ -262,35 +210,38 @@ file es la dirección de la página web devuelta por http__page ()
 */
 
 void http_exec_cgi(int32 file, char *key, char *val) {
-   static char boton1_key[]="boton1";
-   static char boton2_key[]="boton2";
-   static char boton3_key[]="boton3";
+   static char boton1_key[]="CM1";
+   static char boton2_key[]="CM2";
+   static char boton3_key[]="CM3";
    static char lcd_key[]="lcd";
    int accionServo = 0;
    
-   printf(lcd_putc,"\fCGI FILE=%LD", file);
+   //Para ver en la pantalla los valores recibidos
+  
    printf(lcd_putc,"\nKEY=%S", key);
    printf(lcd_putc,"\nVAL=%S", val);
+  
    
    switch (val){
-   case "A": accionServo = 1; break;
    case "C": accionServo = 0; break;
+   case "A": accionServo = 1; break;
+   case "Z": accionServo = 2; break;
    }
 
 
-   /* Se ejecutará al pulsar el botón "Botón 1" en la aplicación web */
+   /* Se ejecutará al recibir un request a CM1 */
    if (stricmp(key,boton1_key)==0) {
       servoAccion(1,accionServo);
    }
-   /* Se ejecutará al pulsar el botón "Botón 2" en la aplicación web */
+   /* Se ejecutará al recibir un request a CM2 */
    if (stricmp(key,boton2_key)==0) {
       servoAccion(2,accionServo);
    }
-   /* Se ejecutará al pulsar el botón "Botón 3" en la aplicación web */
+   /* Se ejecutará al recibir un request a CM3 */
    if (stricmp(key,boton3_key)==0) {
       servoAccion(3,accionServo);
    }
-   /* Se ejecutará al pulsar el botón "Enviar texto" en la aplicación web */
+   /* Se ejecutará al recibir un request a lcd */
    if (stricmp(key,lcd_key)==0) {
       printf(lcd_putc,"\f%s",val);  //Muestra en el lcd el texto recibido
    }
@@ -325,5 +276,4 @@ void main(void) {
    while(TRUE) {
    StackTask();
       }
-   
-    }
+}

@@ -218,7 +218,6 @@ void http_exec_cgi(int32 file, char *key, char *val) {
    
    //Para ver en la pantalla los valores recibidos
   /*
-   printf(lcd_putc,"\fCGI FILE=%LD", file);
    printf(lcd_putc,"\nKEY=%S", key);
    printf(lcd_putc,"\nVAL=%S", val);
   */
@@ -226,7 +225,7 @@ void http_exec_cgi(int32 file, char *key, char *val) {
    switch (val){
    case "C": accionServo = 0; break;
    case "A": accionServo = 1; break;
-   case "AC": accionServo = 2; break;
+   case "Z": accionServo = 2; break;
    }
 
 

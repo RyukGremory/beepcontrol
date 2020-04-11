@@ -13,7 +13,7 @@ Stack size: 31
 
 Lines Stmts  %   Files
 ----- ----- ---  -----
-  289    98   5  18f4550+enc28j60_RyP.c
+  280    98   5  18f4550+enc28j60_RyP.c
   865     0   0  ..\..\..\..\..\Program Files (x86)\PICC\Devices\18F4550.h
   251    81   4  LCD420PIC18F_RyP.c
   550    71   4  tcpip\stacktsk.c
@@ -47,7 +47,7 @@ Lines Stmts  %   Files
   243    52   3  tcpip\arp.c
   882   289  14  tcpip\http.c
 ----- -----
-14316  2002 Total
+14307  2002 Total
 
 Page ROM  %  RAM    Vol Diff  Functions:
 ---- --- --- ---    --- ----  ----------
@@ -61,7 +61,7 @@ Page ROM  %  RAM    Vol Diff  Functions:
 0     78   0    3    319  4.1  lcd_send_byte
 0    112   0    2    384  4.4  lcd_init
 0     86   0    3    426  5.5  lcd_gotoxy
-0     34   0    0             @goto40706
+0     34   0    0             @goto11155
 0    114   0    1    385  5.8  lcd_putc
 0    222   0   13    496  8.2  memmove
 0    136   0   11    318  6.5  strncpy
@@ -131,7 +131,7 @@ Page ROM  %  RAM    Vol Diff  Functions:
 0    210   0    7    506  6.9  TCPGet
 0     44   0    3     52  2.6  TCPIsGetReady
 0   1102   2   22   3595 15.7  TCPTick
-0     44   0    0             @goto43498
+0     44   0    0             @goto14103
 0    418   1   46   1562  9.6  TCPProcess
 0    548   1   58   3289 11.6  TransmitTCP
 0    478   1   12   1233  9.4  FindMatching_TCP_Socket
@@ -172,42 +172,42 @@ Page ROM  %  RAM    Vol Diff  Functions:
 0   3162   6   16   7904 16.1  HTTP_Task
 0     22   0    0    162  2.2  StackInit
 0    440   1    8   2602 10.8  StackTask
-0     40   0    0             @goto44794
+0     40   0    0             @goto15438
 0    768   1    0             @const2218
 0     26   0    0    333  2.8  MACAddrInit
 0     42   0    0    751  2.9  IPAddrInit
 0    154   0    6    171  3.8  moveServo
-0     56   0    5    609  3.3  @READBITA
-0     66   0    6    609  3.3  @WRITEBITA
+0     56   0    5             @READBITA
+0     66   0    6             @WRITEBITA
 0    264   0    9    633  4.6  servoAccion
 0     90   0    8    175  4.5  http_get_page
 0    246   0   33    766  7.8  http_format_char
 0     72   0    2             @PRINTF_X_2157
-0     44   0    3    609  3.3  @DIV88
-0    194   0    6   1329  5.3  @PRINTF_D_2157
+0     44   0    3             @DIV88
+0    194   0    6             @PRINTF_D_2157
 0    294   1   11    876  7.1  http_exec_cgi
 0      8   0    0             @const2261
-0     60   0    1    766  7.8  @STRFINDINLIST
-0     40   0    2    609  3.3  @PSTRINGR_730
+0     60   0    1             @STRFINDINLIST
+0     40   0    2             @PSTRINGR_730
 0    468   1    1    609  3.3  main
-0     14   0    0    609  3.3  @const2269
-0     34   0    2    609  3.3  @PSTRINGC_730
-0     20   0    0   1061  7.0  @const2271
-0     44   0    3    609  3.3  @PSTRINGCN_730
+0     14   0    0             @const2269
+0     34   0    2             @PSTRINGC_730
+0     20   0    0    609  3.3  @const2271
+0     44   0    3             @PSTRINGCN_730
 0    130   0    2             @PRINTF_U_730
- Inline         0   1329  5.3  @cinit1
+ Inline         0             @cinit1
 
 Program metrics:
-    Functions               118
+    Functions               108
     Statements              2002
-    Comments                7384
-    Volume (V)              182273
-    Difficulty (D)          687.9
-    Effort to implement (E) 125378899
-    Time to implement (T)   1934 hours, 52 minutes
-    Est Delivered Bugs (B)  84
-    Cyclomatic Complexity   319
-    Maintainability (MI)    71
+    Comments                7383
+    Volume (V)              163583
+    Difficulty (D)          641.9
+    Effort to implement (E) 104996012
+    Time to implement (T)   1620 hours, 19 minutes
+    Est Delivered Bugs (B)  74
+    Cyclomatic Complexity   302
+    Maintainability (MI)    97
 
  Segment     Used  Free
 -----------  ----  ----

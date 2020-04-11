@@ -106,9 +106,12 @@ class Subject (models.Model):
     code = models.CharField(max_length=10,default='')
     credits = models.IntegerField()
     prerequirements = models.CharField(max_length=70,null=True)
+    status = models.BooleanField(default=1)
 
     def __str__(self):
-        return str(self.id) +' | '+ self.name 
+        return str(self.id) +' | '+ self.name
+
+
 
 class Control (models.Model):
     user = models.ForeignKey(User,on_delete=models.DO_NOTHING)
@@ -117,7 +120,7 @@ class Control (models.Model):
      
     
     def __str__(self):
-        return f'{self.number:02}'+f'{self.floor:02}' + ' - ' + self.name
+        return str(self.user)+' | '+str(self.room)
 
 
 
@@ -162,18 +165,18 @@ class Permission (models.Model):
 ]
     user = models.ForeignKey(User,on_delete=models.DO_NOTHING)
     room = models.ForeignKey("Rooms", verbose_name=("Room"), on_delete=models.CASCADE)
-    status = models.BooleanField(default=1)
     weekday = models.IntegerField(choices=WEEKDAYS)
     fromHour = models.TimeField()
     toHour = models.TimeField() 
+    status = models.BooleanField(default=1)
      
     
     def __str__(self):
-        return str(self.user)+' | '+self.room
+        return str(self.user.first_name)+' | '+ str(self.room)
 
     class Meta:
         ordering = ('weekday', 'fromHour')
-        unique_together = ('weekday', 'fromHour', 'toHour')
+        unique_together = ('user','weekday', 'fromHour', 'toHour')
 
     def __unicode__(self):
         return u'%s: %s - %s' % (self.get_weekday_display(),
