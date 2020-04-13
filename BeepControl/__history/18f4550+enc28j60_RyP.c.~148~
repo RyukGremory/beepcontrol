@@ -6,6 +6,7 @@
 #byte porte = 0xF84
 #byte trisc=0x87
 #byte portc = 0x07
+#byte porta = 0x07
 
 /** Configuración para el uso del stack tcip **/
 #define STACK_USE_ICMP        1  //Módulo de respuesta ICMP (ping)
@@ -25,9 +26,9 @@
 
 #define use_portd_lcd TRUE       //Uso del puerto d para control del lcd
 #include <LCD420PIC18F_RyP.c>    //Carga librería del lcd de 4x20 para familia 18F
-#include "tcpip/stacktsk.c"      //Carga el stack TCP/IP de Microchip 
+#include "tcpip/stacktsk.c"      //Carga el stack TCP/IP de Microchip
+#include <KBD.C>    //Carga librería del Keypad
 /******************************************************************************/
-
 /*********************  PAGINA WEB A MOSTRAR **********************************/
 /* Página principal INDEX (/) */
 const char  HTML_INDEX_PAGE[]="
@@ -45,17 +46,17 @@ const char  HTML_INDEX_PAGE[]="
 <FORM METHOD=GET>
 <input type=\"submit\" name=\"CM1\" value=\"A\">
 <input type=\"submit\" name=\"CM1\" value=\"C\">
-<input type=\"submit\" name=\"CM1\" value=\"Z\">
+<input type=\"submit\" name=\"CM1\" value=\"AC\">
 </FORM>
 <FORM METHOD=GET>
 <input type=\"submit\" name=\"CM2\" value=\"A\">
 <input type=\"submit\" name=\"CM2\" value=\"C\">
-<input type=\"submit\" name=\"CM2\" value=\"Z\">
+<input type=\"submit\" name=\"CM2\" value=\"AC\">
 </FORM>
 <FORM METHOD=GET>
 <input type=\"submit\" name=\"CM3\" value=\"A\">
 <input type=\"submit\" name=\"CM3\" value=\"C\">
-<input type=\"submit\" name=\"CM3\" value=\"Z\">
+<input type=\"submit\" name=\"CM3\" value=\"AC\">
 </FORM>
 </BODY></HTML>
 ";
@@ -90,6 +91,7 @@ void IPAddrInit(void) {
    MY_MASK_BYTE3=255;
    MY_MASK_BYTE4=0;
 }
+
 
 void moveServo(int16 puerto,int16 tiempo){
 unsigned int i;
@@ -249,7 +251,12 @@ void http_exec_cgi(int32 file, char *key, char *val) {
 
 /************************** FUNCIÓN PRINCIPAL *********************************/
 void main(void) {
-
+   /* Keyboard */
+   kbd_init();
+   int x;                        //Valor ASCII de la tecla pulsada
+   int tecla;                    //Valor numérico de la tecla pulsada
+   int servo;                    //Número de servo
+   /* End Keyboard */
    /* Habilitación y configuración del canal analógico 0 */
    setup_adc(ADC_CLOCK_INTERNAL);
    setup_adc_ports(AN0);
@@ -276,7 +283,20 @@ void main(void) {
    delay_ms(10);
    while(TRUE) {
    StackTask();
-   /* KeyPad */
-   /* End KeyPad */
-}
+   x= kbd_getc()-48;                    //En "x" valor ASCII de la tecla pulsada
+         if (x!=0&&x!='9'&&x!='8'&&x!='*'&&x!='#'){ //Si se pulsa tecla numérica 0 a 7 ...
+         servo=x-48;            //Valor ASCII se pasa a valor numerico de servo
+         printf(lcd_putc,"\fServo = %d\n", servo); //...muestra el valor pulsado
+         lcd_putc("Introduce angulo");
+         
+         while (x!='*'){            //Espera a introducir ángulo y aceptar con *
+            x=kbd_getc();
+            tecla=x-48;
+            if (x!=0&&x!='*'&&x!='#'){    //Solo se toman los valores numéricos
+               lcd_putc(" * para aceptar");
+            }
+         }
+      }
+   
    }
+}

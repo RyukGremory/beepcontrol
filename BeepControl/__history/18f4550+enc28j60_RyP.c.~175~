@@ -26,6 +26,9 @@
 #define use_portd_lcd TRUE       //Uso del puerto d para control del lcd
 #include <LCD420PIC18F_RyP.c>    //Carga librería del lcd de 4x20 para familia 18F
 #include "tcpip/stacktsk.c"      //Carga el stack TCP/IP de Microchip 
+/* KeyPad */
+#include <kbd.c>                       //archivo para control del teclado
+/* End KeyPad */
 /******************************************************************************/
 
 /*********************  PAGINA WEB A MOSTRAR **********************************/
@@ -249,7 +252,13 @@ void http_exec_cgi(int32 file, char *key, char *val) {
 
 /************************** FUNCIÓN PRINCIPAL *********************************/
 void main(void) {
-
+   
+   /* KeyPad */
+   int asciiVariable;
+   int tecla;
+   kbd_init();             //Inicialización del teclado
+   /* End KeyPad */
+   
    /* Habilitación y configuración del canal analógico 0 */
    setup_adc(ADC_CLOCK_INTERNAL);
    setup_adc_ports(AN0);
@@ -276,7 +285,25 @@ void main(void) {
    delay_ms(10);
    while(TRUE) {
    StackTask();
+   
    /* KeyPad */
-   /* End KeyPad */
+        
+         while (asciiVariable!='*'){            //Espera a introducir ángulo y aceptar con *
+            asciiVariable = kbd_getc();
+            tecla=asciiVariable-48;
+            if (tecla!='*'&&tecla!='#'){    //Solo se toman los valores numéricos
+       
+               printf(lcd_putc,"\f Angulo = %u\n", tecla);
+               lcd_putc(" * para aceptar");
+            }
+         }
+       
+       angulo=(centenas*100)+(decenas*10)+unidades; 
+       if (angulo>180) angulo=180;    //No acepta valores >180º
+       pwm=(angulo/13)+7;             //Ajuste modulación en función del valor introducido
+       centenas=decenas=unidades=0;
+   /* End KeyPad */   
+   
+   
 }
    }

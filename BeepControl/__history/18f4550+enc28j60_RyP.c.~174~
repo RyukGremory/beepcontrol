@@ -26,6 +26,9 @@
 #define use_portd_lcd TRUE       //Uso del puerto d para control del lcd
 #include <LCD420PIC18F_RyP.c>    //Carga librería del lcd de 4x20 para familia 18F
 #include "tcpip/stacktsk.c"      //Carga el stack TCP/IP de Microchip 
+/* KeyPad */
+#include <kbd.c>                       //archivo para control del teclado
+/* End KeyPad */
 /******************************************************************************/
 
 /*********************  PAGINA WEB A MOSTRAR **********************************/
@@ -249,7 +252,12 @@ void http_exec_cgi(int32 file, char *key, char *val) {
 
 /************************** FUNCIÓN PRINCIPAL *********************************/
 void main(void) {
-
+   
+   /* KeyPad */
+   int asciiVariable;
+   kbd_init();             //Inicialización del teclado
+   /* End KeyPad */
+   
    /* Habilitación y configuración del canal analógico 0 */
    setup_adc(ADC_CLOCK_INTERNAL);
    setup_adc_ports(AN0);
@@ -276,7 +284,12 @@ void main(void) {
    delay_ms(10);
    while(TRUE) {
    StackTask();
+   
    /* KeyPad */
-   /* End KeyPad */
+   asciiVariable = kbd_getc();
+   
+   /* End KeyPad */   
+   
+   
 }
    }

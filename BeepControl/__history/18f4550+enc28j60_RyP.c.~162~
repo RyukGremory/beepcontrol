@@ -26,6 +26,10 @@
 #define use_portd_lcd TRUE       //Uso del puerto d para control del lcd
 #include <LCD420PIC18F_RyP.c>    //Carga librería del lcd de 4x20 para familia 18F
 #include "tcpip/stacktsk.c"      //Carga el stack TCP/IP de Microchip 
+/* KeyPad */
+#define use_portb_kbd TRUE             //Configuración puerto b control teclado
+#include <kbd.c>                       //archivo para control del teclado
+/* End KeyPad */
 /******************************************************************************/
 
 /*********************  PAGINA WEB A MOSTRAR **********************************/
@@ -45,17 +49,17 @@ const char  HTML_INDEX_PAGE[]="
 <FORM METHOD=GET>
 <input type=\"submit\" name=\"CM1\" value=\"A\">
 <input type=\"submit\" name=\"CM1\" value=\"C\">
-<input type=\"submit\" name=\"CM1\" value=\"Z\">
+<input type=\"submit\" name=\"CM1\" value=\"AC\">
 </FORM>
 <FORM METHOD=GET>
 <input type=\"submit\" name=\"CM2\" value=\"A\">
 <input type=\"submit\" name=\"CM2\" value=\"C\">
-<input type=\"submit\" name=\"CM2\" value=\"Z\">
+<input type=\"submit\" name=\"CM2\" value=\"AC\">
 </FORM>
 <FORM METHOD=GET>
 <input type=\"submit\" name=\"CM3\" value=\"A\">
 <input type=\"submit\" name=\"CM3\" value=\"C\">
-<input type=\"submit\" name=\"CM3\" value=\"Z\">
+<input type=\"submit\" name=\"CM3\" value=\"AC\">
 </FORM>
 </BODY></HTML>
 ";
@@ -249,7 +253,14 @@ void http_exec_cgi(int32 file, char *key, char *val) {
 
 /************************** FUNCIÓN PRINCIPAL *********************************/
 void main(void) {
+   /* KeyPad */
+   /* End KeyPad */
 
+   /* KeyPad */
+   kbd_init();             //Inicialización del teclado
+   port_d_pullups(1);
+   /* End KeyPad */
+   
    /* Habilitación y configuración del canal analógico 0 */
    setup_adc(ADC_CLOCK_INTERNAL);
    setup_adc_ports(AN0);
@@ -264,7 +275,7 @@ void main(void) {
    /* Inicialización del lcd */
    lcd_init();
    printf(lcd_putc,"\fBeepControl");   //Mensaje de inicio en lcd 
-   delay_ms(1000);
+   delay_ms(500);
   
    /* Inicialización del Stack */
    MACAddrInit(); //Se asigna la dirección MAC elegida 
@@ -276,7 +287,6 @@ void main(void) {
    delay_ms(10);
    while(TRUE) {
    StackTask();
-   /* KeyPad */
-   /* End KeyPad */
+  
 }
-   }
+   }}

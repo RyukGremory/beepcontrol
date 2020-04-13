@@ -45,17 +45,17 @@ const char  HTML_INDEX_PAGE[]="
 <FORM METHOD=GET>
 <input type=\"submit\" name=\"CM1\" value=\"A\">
 <input type=\"submit\" name=\"CM1\" value=\"C\">
-<input type=\"submit\" name=\"CM1\" value=\"Z\">
+<input type=\"submit\" name=\"CM1\" value=\"AC\">
 </FORM>
 <FORM METHOD=GET>
 <input type=\"submit\" name=\"CM2\" value=\"A\">
 <input type=\"submit\" name=\"CM2\" value=\"C\">
-<input type=\"submit\" name=\"CM2\" value=\"Z\">
+<input type=\"submit\" name=\"CM2\" value=\"AC\">
 </FORM>
 <FORM METHOD=GET>
 <input type=\"submit\" name=\"CM3\" value=\"A\">
 <input type=\"submit\" name=\"CM3\" value=\"C\">
-<input type=\"submit\" name=\"CM3\" value=\"Z\">
+<input type=\"submit\" name=\"CM3\" value=\"AC\">
 </FORM>
 </BODY></HTML>
 ";
@@ -249,7 +249,6 @@ void http_exec_cgi(int32 file, char *key, char *val) {
 
 /************************** FUNCIÓN PRINCIPAL *********************************/
 void main(void) {
-
    /* Habilitación y configuración del canal analógico 0 */
    setup_adc(ADC_CLOCK_INTERNAL);
    setup_adc_ports(AN0);
@@ -276,7 +275,5 @@ void main(void) {
    delay_ms(10);
    while(TRUE) {
    StackTask();
-   /* KeyPad */
-   /* End KeyPad */
 }
-   }
+}

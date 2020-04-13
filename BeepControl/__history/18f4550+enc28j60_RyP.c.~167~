@@ -32,30 +32,26 @@
 /* Página principal INDEX (/) */
 const char  HTML_INDEX_PAGE[]="
 <HTML><BODY BGCOLOR=#FFFFFF TEXT=#000000>
-
 <center><H1>BeepControl </H1></center>
 <BR><center><H2>Dashboard</H2></CENTER>
-
-
 <FORM METHOD=GET>
 <P>LCD: <INPUT TYPE=\"text\" NAME=\"lcd\" size=20 maxlength=16>
 <input type=\"submit\" value=\"Enviar texto\">
 </FORM>
-
 <FORM METHOD=GET>
 <input type=\"submit\" name=\"CM1\" value=\"A\">
 <input type=\"submit\" name=\"CM1\" value=\"C\">
-<input type=\"submit\" name=\"CM1\" value=\"Z\">
+<input type=\"submit\" name=\"CM1\" value=\"AC\">
 </FORM>
 <FORM METHOD=GET>
 <input type=\"submit\" name=\"CM2\" value=\"A\">
 <input type=\"submit\" name=\"CM2\" value=\"C\">
-<input type=\"submit\" name=\"CM2\" value=\"Z\">
+<input type=\"submit\" name=\"CM2\" value=\"AC\">
 </FORM>
 <FORM METHOD=GET>
 <input type=\"submit\" name=\"CM3\" value=\"A\">
 <input type=\"submit\" name=\"CM3\" value=\"C\">
-<input type=\"submit\" name=\"CM3\" value=\"Z\">
+<input type=\"submit\" name=\"CM3\" value=\"AC\">
 </FORM>
 </BODY></HTML>
 ";
@@ -97,8 +93,8 @@ unsigned int i;
       output_toggle(puerto);
       delay_us(tiempo);
       output_low(puerto);
-    }}
-
+    }
+}
 
 void servoAccion(int servo, int accion)   //180 Degree
 {
@@ -159,7 +155,6 @@ la página web con las variables del programa del PIC. Se encarga de enviar los
 cambios producidos en la aplicación del PIC y reflejarlos en la aplicación web. 
 Muestra,por tanto, las lectura obtenidas por el PIC y las representa en la 
 aplicación de la página web      
-
 %0 es la variable virtual para representar el valor de la lectura del canal 
 analógico
 %1 es la variable virtual para representar el valor de la lectura del bit 0 del 
@@ -202,11 +197,9 @@ página web con las variables del programa del PIC. Se encarga de recibir
 los cambios producidos en la aplicación web y reflejarlos en el hardware del PIC. 
 Ejecuta, por tanto, la acción elegida según el valor de la variable virtual recibida 
 de la página web
-
 key es la variable virtual que viene de la pagina web
 val es el valor de una variable virtual de la página web
 file es la dirección de la página web devuelta por http__page ()
-
 */
 
 void http_exec_cgi(int32 file, char *key, char *val) {
@@ -249,7 +242,6 @@ void http_exec_cgi(int32 file, char *key, char *val) {
 
 /************************** FUNCIÓN PRINCIPAL *********************************/
 void main(void) {
-
    /* Habilitación y configuración del canal analógico 0 */
    setup_adc(ADC_CLOCK_INTERNAL);
    setup_adc_ports(AN0);
@@ -276,7 +268,5 @@ void main(void) {
    delay_ms(10);
    while(TRUE) {
    StackTask();
-   /* KeyPad */
-   /* End KeyPad */
+      }
 }
-   }

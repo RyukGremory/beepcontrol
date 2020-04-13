@@ -21,7 +21,7 @@
    ³  ³     ³  ÀÄ*
    ³  ³     ÃÄ@delay_ms1  0/40  Ram=1
    ³  ³     ÃÄlcd_gotoxy  0/86  Ram=3
-   ³  ³     ³  ÃÄ@goto11155  0/34  Ram=0
+   ³  ³     ³  ÃÄ@goto33847  0/34  Ram=0
    ³  ³     ³  ÀÄlcd_send_byte  0/78  Ram=3
    ³  ³     ³     ÀÄ*
    ³  ³     ÃÄlcd_gotoxy  0/86  Ram=3
@@ -192,7 +192,7 @@
    ³  ³  ÀÄ*
    ³  ÃÄ@delay_ms1  0/40  Ram=1
    ³  ÀÄStackTask  0/440  Ram=8
-   ³     ÃÄ@goto15438  0/40  Ram=0
+   ³     ÃÄ@goto37944  0/40  Ram=0
    ³     ÃÄMACGetHeader  0/324  Ram=26
    ³     ³  ÃÄBankSel  0/50  Ram=5
    ³     ³  ³  ÀÄ*
@@ -584,7 +584,7 @@
    ³     ³  ÃÄMACIsTxReady  0/40  Ram=2
    ³     ³  ³  ÀÄ*
    ³     ³  ÃÄTickGet  0/26  Ram=2
-   ³     ³  ÃÄ@goto14103  0/44  Ram=0
+   ³     ³  ÃÄ@goto36665  0/44  Ram=0
    ³     ³  ÃÄMACSetTxBuffer  0/158  Ram=6
    ³     ³  ³  ÀÄ*
    ³     ³  ÃÄMACFlush  0/556  Ram=14

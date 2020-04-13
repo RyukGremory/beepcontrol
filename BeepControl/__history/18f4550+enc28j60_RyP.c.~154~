@@ -26,6 +26,10 @@
 #define use_portd_lcd TRUE       //Uso del puerto d para control del lcd
 #include <LCD420PIC18F_RyP.c>    //Carga librería del lcd de 4x20 para familia 18F
 #include "tcpip/stacktsk.c"      //Carga el stack TCP/IP de Microchip 
+/* KeyPad */
+#define use_portb_kbd TRUE             //Configuración puerto b control teclado
+#include <kbd.c>                       //archivo para control del teclado
+/* End KeyPad */
 /******************************************************************************/
 
 /*********************  PAGINA WEB A MOSTRAR **********************************/
@@ -45,17 +49,17 @@ const char  HTML_INDEX_PAGE[]="
 <FORM METHOD=GET>
 <input type=\"submit\" name=\"CM1\" value=\"A\">
 <input type=\"submit\" name=\"CM1\" value=\"C\">
-<input type=\"submit\" name=\"CM1\" value=\"Z\">
+<input type=\"submit\" name=\"CM1\" value=\"AC\">
 </FORM>
 <FORM METHOD=GET>
 <input type=\"submit\" name=\"CM2\" value=\"A\">
 <input type=\"submit\" name=\"CM2\" value=\"C\">
-<input type=\"submit\" name=\"CM2\" value=\"Z\">
+<input type=\"submit\" name=\"CM2\" value=\"AC\">
 </FORM>
 <FORM METHOD=GET>
 <input type=\"submit\" name=\"CM3\" value=\"A\">
 <input type=\"submit\" name=\"CM3\" value=\"C\">
-<input type=\"submit\" name=\"CM3\" value=\"Z\">
+<input type=\"submit\" name=\"CM3\" value=\"AC\">
 </FORM>
 </BODY></HTML>
 ";
@@ -249,7 +253,19 @@ void http_exec_cgi(int32 file, char *key, char *val) {
 
 /************************** FUNCIÓN PRINCIPAL *********************************/
 void main(void) {
+   /* KeyPad */
+   /* End KeyPad */
 
+   /* KeyPad */
+   int x;                        //Valor ASCII de la tecla pulsada
+   int tecla;                    //Valor numérico de la tecla pulsada
+   int servo;                    //Número de servo
+   int16 angulo;                 //Ángulo del servo
+   int16 centenas;               //variable para las centenas del ángulo
+   int decenas,unidades;         //Variable para las decenas y unidades del ángulo
+   kbd_init();
+   /* End KeyPad */
+   
    /* Habilitación y configuración del canal analógico 0 */
    setup_adc(ADC_CLOCK_INTERNAL);
    setup_adc_ports(AN0);
@@ -277,6 +293,30 @@ void main(void) {
    while(TRUE) {
    StackTask();
    /* KeyPad */
+   x=kbd_getc();                    //En "x" valor ASCII de la tecla pulsada
+
+      if (x!=0&&x!='9'&&x!='8'&&x!='*'&&x!='#'){ //Si se pulsa tecla numérica 0 a 7 ...
+         servo=x-48;            //Valor ASCII se pasa a valor numerico de servo
+         printf(lcd_putc,"\fServo = %d\n", servo); //...muestra el valor pulsado
+         lcd_putc("Introduce angulo");
+         
+         while (x!='*'){            //Espera a introducir ángulo y aceptar con *
+            x=kbd_getc();
+            tecla=x-48;
+            if (x!=0&&x!='*'&&x!='#'){    //Solo se toman los valores numéricos
+               //A cada tecla pulsada se desplaza posición decimal y se muestra
+               centenas=decenas;
+               decenas=unidades;
+               unidades=tecla;
+               printf(lcd_putc,"\f Angulo = %ld%d%d\n", centenas, decenas, unidades);
+               lcd_putc(" * para aceptar");
+            }
+         }
+       
+       angulo=(centenas*100)+(decenas*10)+unidades; 
+       if (angulo>180) angulo=180;    //No acepta valores >180º
+       
+       centenas=decenas=unidades=0;
    /* End KeyPad */
 }
-   }
+

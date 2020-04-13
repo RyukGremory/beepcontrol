@@ -227,8 +227,6 @@ void http_exec_cgi(int32 file, char *key, char *val) {
    case "A": accionServo = 1; break;
    case "Z": accionServo = 2; break;
    }
-
-
    /* Se ejecutará al recibir un request a CM1 */
    if (stricmp(key,boton1_key)==0) {
       servoAccion(1,accionServo);
