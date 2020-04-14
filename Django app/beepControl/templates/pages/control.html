@@ -7,46 +7,39 @@
 {% block stylesheets %}{% endblock stylesheets %}
 
 {% block content %}
-<div class="row">
-            <div class="col-md-6">
-                <div class="card">
-                    <div class="card-header">
-                        <h4 class="card-title">Nav Pills With Icon (Vertical Tabs)</h4>
+<div class="content">
+    <div class="page-inner">
+<h4 class="page-title">Controladores</h4>
+        <div class="row justify-content-center align-items-center mb-5">
+            <div class="col-md-3 pl-md-0">
+                <div class="card-pricing2 card-success">
+                    <div class="pricing-header">
+                        <h3 class="fw-bold">{{element.name}}</h3>
+                        <span class="sub-title">{{element}}</span>
                     </div>
-                    <div class="card-body">
-                        <div class="row">
-                            <div class="col-5 col-md-4">
-                                <div class="nav flex-column nav-pills nav-secondary nav-pills-no-bd nav-pills-icons" id="v-pills-tab-with-icon" role="tablist" aria-orientation="vertical">
-                                   {% for element in elements %}
-								   <a class="nav-link active" id="v-pills-home-tab-icons" data-toggle="pill" href="#v-pills-home-icons" role="tab" aria-controls="v-pills-home-icons" aria-selected="true">
-                                        <i class="flaticon-home"></i>
-                                        {{element.name}}
-                                    </a>
-
-                                </div>
-                            </div>
-                            <div class="col-7 col-md-8">
-                                <div class="tab-content" id="v-pills-with-icon-tabContent">
-                                    <div class="tab-pane fade show active" id="v-pills-home-icons" role="tabpanel" aria-labelledby="v-pills-home-tab-icons">
-                                        <p>Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts. Separated they live in Bookmarksgrove right at the coast of the Semantics, a large language ocean.</p>
-
-                                        <p>A small river named Duden flows by their place and supplies it with the necessary regelialia. It is a paradisematic country, in which roasted parts of sentences fly into your mouth.</p>
-                                    </div>
-                                    <div class="tab-pane fade" id="v-pills-profile-icons" role="tabpanel" aria-labelledby="v-pills-profile-tab-icons">
-                                        <p>Even the all-powerful Pointing has no control about the blind texts it is an almost unorthographic life One day however a small line of blind text by the name of Lorem Ipsum decided to leave for the far World of Grammar.</p>
-                                        <p>The Big Oxmox advised her not to do so, because there were thousands of bad Commas, wild Question Marks and devious Semikoli, but the Little Blind Text didn’t listen. She packed her seven versalia, put her initial into the belt and made herself on the way.
-                                        </p>
-                                    </div>
-                                </div>
-								{% endfor %}
-                            </div>
+                    <div class="price-value">
+                        <div class="value">
+                            
                         </div>
                     </div>
+       <br>
+	   <br>
+	   <br>
+
+
+<div class="form-group">
+
+                                
+					<form method="POST">
+					                   {% csrf_token %}        
+                                   {{form}}
+								   <input class="btn"type="submit" value="Submit">
+</form> </div>
                 </div>
             </div>
+
+
         </div>
-		</div>
-		</div>
 {% endblock content %}
 
 {% block javascripts %}
@@ -54,6 +47,38 @@
 	<script src="/static/assets/js/demo.js"></script>
 
 	<script>
+(function() {
+    // get references to select list and display text box
+    var sel = document.getElementById('SelectUsuarios');
+    
+	function getSelectedOption(sel) {
+        var opt;
+        for ( var i = 0, len = sel.options.length; i < len; i++ ) {
+            opt = sel.options[i];
+            if ( opt.selected === true ) {
+                break;
+            }
+        }
+        return opt;
+    }
+
+    // assign onclick handlers to the buttons
+    document.getElementById('showVal').onclick = function () {
+        el.value = sel.value;    
+    }
+    
+    document.getElementById('showTxt').onclick = function () {
+        // access text property of selected option
+        el.value = sel.options[sel.selectedIndex].text;
+    }
+
+    document.getElementById('doLoop').onclick = function () {
+        var opt = getSelectedOption(sel);
+        el.value = opt.value;
+    }
+    
+}());
+
   event.preventDefault();
 }
 		Circles.create({

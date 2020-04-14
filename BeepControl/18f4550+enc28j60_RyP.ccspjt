@@ -11,10 +11,10 @@ Type=4
 1=18f4550+enc28j60_RyP.c
 
 [defines]
-buildcount=132
+buildcount=223
 
 [ProjectLog]
-Days=4
+Days=5
 D1=10-04-2020
 D1_L=29
 D1_L1=[44532]Started Editing.
@@ -27,7 +27,7 @@ D1_L7=[49745]Started Editing.
 D1_L8=[50046]Stopped Editing.
 D1_L9=[50142]Started Editing.
 D1_L10=[50940]Stopped Editing.
-TotalEdit=368
+TotalEdit=564
 TotalDebug=0
 D1_E=259
 D1_D=0
@@ -116,15 +116,41 @@ D4_L25=[55976]Project Opened.
 D4_L26=[55986]Started Editing.
 D4_L27=[56297]Stopped Editing.
 D4_L28=[56297]Project Closed.
+D5=14-04-2020
+D5_L=22
+D5_L1=[31842]Project Opened.
+D5_L2=[31852]Started Editing.
+D5_L3=[33226]Stopped Editing.
+D5_L4=[33269]Started Editing.
+D5_L5=[34061]Stopped Editing.
+D5_L6=[34182]Started Editing.
+D5_L7=[34482]Stopped Editing.
+D5_L8=[34590]Started Editing.
+D5_L9=[35470]Stopped Editing.
+D5_L10=[35500]Started Editing.
+D5_L11=[39671]Stopped Editing.
+D5_L12=[41833]Started Editing.
+D5_L13=[45040]Stopped Editing.
+D5_L14=[45089]Started Editing.
+D5_L15=[46064]Stopped Editing.
+D5_L16=[46345]Started Editing.
+D5_L17=[46692]Stopped Editing.
+D5_L18=[46854]Started Editing.
+D5_L19=[49247]Stopped Editing.
+D5_E=196
+D5_D=0
+D5_L20=[49600]Project Closed.
+D5_L21=[57031]Project Opened.
+D5_L22=[57346]Project Closed.
 
 [Opened Files]
 1=18f4550+enc28j60_RyP.c
-t1=211
+t1=242
 2=..\..\..\..\..\Program Files (x86)\PICC\Devices\kbd.c
 t2=32
 3=..\..\..\..\..\Program Files (x86)\PICC\Devices\kbd4.c
 t3=99
-Count=2
+Count=1
 4=..\..\..\..\..\Program Files (x86)\PICC\Devices\tick.c
 t4=16
 5=tcpip\tick.h

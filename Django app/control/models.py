@@ -1,6 +1,7 @@
 from django.db import models
 from django.utils.timezone import now
 from django.contrib.auth.models import User
+from django.utils.translation import gettext_lazy as _
 
 # Create your models here.
 class Institutions (models.Model):
@@ -114,10 +115,16 @@ class Subject (models.Model):
 
 
 class Control (models.Model):
+    class Acciones(models.TextChoices):
+        Entrar = 'A',_('Entrar')
+        Salir = 'C',_('Cerrar')
+        Ciclo = 'Z',_('Ciclo')
+
     user = models.ForeignKey(User,on_delete=models.DO_NOTHING)
     room = models.ForeignKey("Rooms", verbose_name=("Room"), on_delete=models.CASCADE)
     status = models.BooleanField(default=1)
-     
+    accion = models.CharField(max_length=2,choices=Acciones.choices,default=Acciones.Entrar)
+    horaEntrada = models.DateTimeField(default=now, editable=False)
     
     def __str__(self):
         return str(self.user)+' | '+str(self.room)
@@ -170,7 +177,6 @@ class Permission (models.Model):
     toHour = models.TimeField() 
     status = models.BooleanField(default=1)
      
-    
     def __str__(self):
         return str(self.user.first_name)+' | '+ str(self.room)
 

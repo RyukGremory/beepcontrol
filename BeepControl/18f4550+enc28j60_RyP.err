@@ -1,4 +1,4 @@
-Compiling C:\Users\pdelacruz\Downloads\AutomatizacionRobotica\BeepControl\18f4550+enc28j60_RyP on 13-Apr-20 at 15:37
+Compiling C:\Users\pdelacruz\Downloads\AutomatizacionRobotica\BeepControl\18f4550+enc28j60_RyP on 14-Apr-20 at 13:35
 >>> Warning 243 "C:\Program Files (x86)\PICC\Devices\string.h" Line 126(1,1): May be missing a typecast
 >>> Warning 243 "C:\Program Files (x86)\PICC\Devices\string.h" Line 139(1,1): May be missing a typecast
 >>> Warning 243 "C:\Program Files (x86)\PICC\Devices\string.h" Line 149(1,1): May be missing a typecast
@@ -21,3 +21,6 @@ Compiling C:\Users\pdelacruz\Downloads\AutomatizacionRobotica\BeepControl\18f455
 >>> Warning 242 "C:\Users\pdelacruz\Downloads\AutomatizacionRobotica\BeepControl\tcpip\http.c" Line 876(26,27): May be missing a break
 >>> Warning 207 "C:\Users\pdelacruz\Downloads\AutomatizacionRobotica\BeepControl\tcpip\stacktsk.c" Line 417(1,1): Code has no effect
 >>> Warning 207 "C:\Users\pdelacruz\Downloads\AutomatizacionRobotica\BeepControl\tcpip\stacktsk.c" Line 460(1,1): Code has no effect
+      Memory usage:   ROM=88%      RAM=36% - 45%
+      0 Errors,  22 Warnings.
+Build Successful.

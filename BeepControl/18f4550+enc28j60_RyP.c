@@ -6,6 +6,8 @@
 #byte porte = 0xF84
 #byte trisc=0x87
 #byte portc = 0x07
+#byte trisa=0xff
+#byte porta=0xff
 
 /** Configuración para el uso del stack tcip **/
 #define STACK_USE_ICMP        1  //Módulo de respuesta ICMP (ping)
@@ -21,10 +23,14 @@
 #define PIN_ENC_MAC_CS  PIN_B2      //Chip select
 #define PIN_ENC_MAC_RST PIN_B3      //Reset
 #define PIN_ENC_MAC_INT PIN_B4      //Interrupción
+#use STANDARD_IO( A )
+#define PIN_LED_IN_1   PIN_A4
+#define PIN_LED_IN_2   PIN_A5
+#define PIN_LED_IN_3   PIN_A6
 /******************************************************************************/
 
 #define use_portd_lcd TRUE       //Uso del puerto d para control del lcd
-#include <LCD420PIC18F_RyP.c>    //Carga librería del lcd de 4x20 para familia 18F
+#include <lcd.c>    //Carga librería del lcd de 4x20 para familia 18F
 #include "tcpip/stacktsk.c"      //Carga el stack TCP/IP de Microchip 
 /******************************************************************************/
 
@@ -247,15 +253,17 @@ void http_exec_cgi(int32 file, char *key, char *val) {
    }
 }
 
+
 /************************** FUNCIÓN PRINCIPAL *********************************/
 void main(void) {
-
    /* Habilitación y configuración del canal analógico 0 */
    setup_adc(ADC_CLOCK_INTERNAL);
    setup_adc_ports(AN0);
    set_adc_channel(0);
    delay_ms(1);
-   
+   TRISA = 0xFF;
+   int lab_no = 0;
+
    /*Reset de las salidas */
    output_low(PIN_C0);
    output_low(PIN_C1);
@@ -263,7 +271,9 @@ void main(void) {
     
    /* Inicialización del lcd */
    lcd_init();
-   printf(lcd_putc,"\fBeepControl");   //Mensaje de inicio en lcd 
+   printf(lcd_putc,"\fUniversidad APEC");   //Mensaje de inicio en lcd
+   lcd_gotoxy(1,4);
+   printf(lcd_putc,"Laboratorio: %u",lab_no);
    delay_ms(1000);
   
    /* Inicialización del Stack */
@@ -272,11 +282,32 @@ void main(void) {
    StackInit();   //Inicializa el stack
    
    /* Muestra la IP elegida en lcd */
-   printf(lcd_putc,"\nIP: %u.%u.%u.%u:%u", MY_IP_BYTE1, MY_IP_BYTE2, MY_IP_BYTE3, MY_IP_BYTE4,HTTP_SOCKET);
-   delay_ms(10);
+  /* printf(lcd_putc,"\nIP: %u.%u.%u.%u:%u", MY_IP_BYTE1, MY_IP_BYTE2, MY_IP_BYTE3, MY_IP_BYTE4,HTTP_SOCKET);
+   delay_ms(10);*/
    while(TRUE) {
    StackTask();
-   /* KeyPad */
-   /* End KeyPad */
+   int pulsado = PORTA;
+
+   if (pulsado == 4){
+   pulsado = 0;
+   lab_no = 1;
+   lcd_gotoxy(1,3);
+   printf(lcd_putc,"Laboratorio: %u",lab_no);
+   servoAccion(1,2);
+   }
+   if (pulsado == 8){
+   pulsado = 0;
+   lab_no = 2;
+   lcd_gotoxy(1,3);
+   printf(lcd_putc,"Laboratorio: %u",lab_no);
+   servoAccion(2,2);
+   }
+   if (pulsado == 16){
+   pulsado = 0;
+   lab_no = 3;
+   lcd_gotoxy(1,3);
+   printf(lcd_putc,"Laboratorio: %u",lab_no);
+   servoAccion(3,2);
+   }
 }
    }
